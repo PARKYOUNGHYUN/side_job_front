@@ -52,16 +52,15 @@ export default {
 },
 methods: {
   createBoard: function(postType) {
-      this.$http.get('boards', {
-        params: {
-          postType: postType,
-          limit: 5
-        }
-      }).then((response) => {
+    this.$http.get('boards', {
+      params: {
+        postType: postType,
+        limit: 5
+      }
+    }).then((response) => {
       this.posts = response.data
       console.log(response.data)
-    })
-    .catch((e) => {
+    }).catch((e) => {
       console.error(e)
     })
   }

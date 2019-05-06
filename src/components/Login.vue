@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+
   export default {
     data: () => {
       return {
@@ -40,7 +42,7 @@
         password: '',
         passwordRules: [
           v => !!v || '必須項目です。',
-          v => v.length >= 8 || '8字以上入力してください。'
+          v => v.length >= 3 || '8字以上入力してください。'
         ],
         email: '',
         emailRules: [
@@ -49,31 +51,43 @@
         ]
       }
     },
+    computed: {
+      ...mapState('account', ['status'])
+    },
     methods: {
-      login: function (event) {
-        if(this.validate) {
-          this.$http.post('http://localhost:8080/api/user', {
-            mail: this.email,
-            password: this.password,
-          })
-          .then(
-            (response) => {  //로그인 성공
-              alert('success login' + response)
-            },
-            (error) => { // error 를 보여줌
-              alert(error.response.data.error)
-            }
-          )
-          .catch(error => {
-            alert(error)
-          })
-        }
-        // 메소드 안에서 사용하는 `this` 는 Vue 인스턴스를 가리킵니다
-        alert('Hello ' + this.name + '!')
-        // `event` 는 네이티브 DOM 이벤트입니다
-        if (event) {
-          alert(event.target.tagName)
-          this.dialog = false
+      // login: function (event) {
+      //   if(this.validate) {
+      //     this.$http.post('http://localhost:8080/api/user', {
+      //       mail: this.email,
+      //       password: this.password,
+      //     })
+      //     .then(
+      //       (response) => {  //로그인 성공
+      //         alert('success login' + response)
+      //       },
+      //       (error) => { // error 를 보여줌
+      //         alert(error.response.data.error)
+      //       }
+      //     )
+      //     .catch(error => {
+      //       alert(error)
+      //     })
+      //   }
+      //   // 메소드 안에서 사용하는 `this` 는 Vue 인스턴스를 가리킵니다
+      //   alert('Hello ' + this.name + '!')
+      //   // `event` 는 네이티브 DOM 이벤트입니다
+      //   if (event) {
+      //     alert(event.target.tagName)
+      //     this.dialog = false
+      //   }
+      // },
+      ...mapActions(['login']),
+      login: function () {
+        try {
+          let loginResult = this.login({mail: this.mail, password: this.password})
+          console.log(loginResult) // 로그인 성공하면 true, 아니면 false
+        } catch (err) {
+          console.error(err)
         }
       },
       validate () {

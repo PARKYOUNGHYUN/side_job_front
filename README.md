@@ -1,4 +1,4 @@
-# frontend
+# side_job_front
 
 ## Project setup
 ```

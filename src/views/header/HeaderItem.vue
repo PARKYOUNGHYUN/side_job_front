@@ -5,25 +5,38 @@
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items>
-        <v-btn flat to="/mypage">マイページ</v-btn>
+        <v-btn flat to="/mypage" v-if="getAuth">マイページ</v-btn>
+        <v-btn flat color="primary" v-if="getAuth" @click="onSubmit">ログアウト</v-btn>
         <Login/>
     </v-toolbar-items>
   </v-toolbar>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 import Login from '@/components/Login'
 
 export default {
   components: {
     Login
   },
-  data: () => ({
-    ecosystem: [
-      'ログイン',
-      'ログアウト'
-    ]
-  })
+  methods: {
+    ...mapActions(['logout']),
+    onSubmit () {
+      this.logout()
+      if(this.$route.name == 'Mypage') {
+        this.$router.push({
+          name: 'Top'
+        })
+      }
+    }
+  },
+  computed: {
+    ...mapGetters({
+      errorState: 'getErrorState',
+      getAuth: 'getIsAuth'
+    })
+  }
 }
 </script>
 

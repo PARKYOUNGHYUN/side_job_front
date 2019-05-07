@@ -49,31 +49,31 @@ export default {
   },
   created() {
     this.createBoard(0);
-},
-methods: {
-  createBoard: function(postType) {
-    this.$http.get('boards', {
-      params: {
-        postType: postType,
-        limit: 5
-      }
-    }).then((response) => {
-      this.posts = response.data
-      console.log(response.data)
-    }).catch((e) => {
-      console.error(e)
-    })
+  },
+  methods: {
+    createBoard: function(postType) {
+      this.$http.get('boards', {
+        params: {
+          postType: postType,
+          limit: 5
+        }
+      }).then((response) => {
+        this.posts = response.data
+        console.log(response.data)
+      }).catch((e) => {
+        console.error(e)
+      })
+    }
+    // createPost () {
+    //   this.$http.post('posts', {
+    //     title: this.postTitle,
+    //     body: this.postBody
+    //   }).then((response) => {})
+    //   .catch((e) => {
+    //     console.error(e)
+    //   })
+    // }
   }
-  // createPost () {
-  //   this.$http.post('posts', {
-  //     title: this.postTitle,
-  //     body: this.postBody
-  //   }).then((response) => {})
-  //   .catch((e) => {
-  //     console.error(e)
-  //   })
-  // }
-}
 }
 </script>
 

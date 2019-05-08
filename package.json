@@ -39,7 +39,16 @@
       "eslint:recommended"
     ],
     "rules": {
-      "no-console": ["error", { "allow": ["log", "warn", "error"] }]
+      "no-console": [
+        "error",
+        {
+          "allow": [
+            "log",
+            "warn",
+            "error"
+          ]
+        }
+      ]
     },
     "parserOptions": {
       "parser": "babel-eslint"

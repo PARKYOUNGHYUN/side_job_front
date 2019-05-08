@@ -66,10 +66,8 @@ export default {
       }
     },
     validate () {
-      if (this.$refs.form.validate()) {
-        this.snackbar = true
+      if (this.$refs.form.validate())
         return true
-      }
       return false
     },
     resetValidation () {

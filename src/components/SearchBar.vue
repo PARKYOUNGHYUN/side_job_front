@@ -23,7 +23,7 @@
           <v-date-picker v-model="end_date" @change="menu2 = false" no-title></v-date-picker>
         </v-menu>
       </v-flex>
-      <v-flex md2>
+      <v-flex md2 v-if="getAuth">
         <v-checkbox label="お気に入りタグ"></v-checkbox>
       </v-flex>
       <v-flex md1>
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import moment from 'moment'
 
 export default {
@@ -51,6 +52,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      getAuth: 'getIsAuth'
+    }),
     startDateFormatted () {
       return this.start_date ? moment(this.start_date).format('YYYY/MM/DD') : ''
     },

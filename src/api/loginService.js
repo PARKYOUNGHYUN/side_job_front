@@ -12,10 +12,9 @@ const getUserInfo = (mail, password) => {
 export default {
   async login (mail, password) {
     try {
-      const getUserInfoPromise = await getUserInfo(mail, password)
-      const userInfoResponse = await Promise.all([getUserInfoPromise])
-      if (userInfoResponse[0].data.length === 0) return 'noAuth'
-      return userInfoResponse
+      const userInfo = await getUserInfo(mail, password)
+      if (userInfo.data == null) return 'noAuth'
+      return userInfo.data
     } catch (err) {
       console.error(err)
     }

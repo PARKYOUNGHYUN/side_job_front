@@ -1,8 +1,8 @@
 import * as types from './mutation_types'
 
 export default {
-  [types.MAIL] (state, mail) {
-    state.mail = mail
+  [types.USER_NO] (state, userNo) {
+    state.userNo = userNo
   },
   [types.ERROR_STATE] (state, errorState) {
     state.errorState = errorState

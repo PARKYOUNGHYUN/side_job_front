@@ -1,8 +1,8 @@
-import { MAIL, IS_AUTH, ERROR_STATE } from './mutation_types'
+import { USER_NO, IS_AUTH, ERROR_STATE } from './mutation_types'
 import api from '@/api'
 
-let setMail = ({ commit }, data) => {
-  commit(MAIL, data)
+let setUserNo = ({ commit }, data) => {
+  commit(USER_NO, data)
 }
 
 let setErrorState = ({ commit }, data) => {
@@ -20,7 +20,7 @@ let processResponse = (store, loginResponse) => {
       setIsAuth(store, false)
       break
     default:
-      setMail(store, loginResponse.MAIL)
+      setUserNo(store, loginResponse.userNo)
       setErrorState(store, '')
       setIsAuth(store, true)
   }
@@ -34,6 +34,6 @@ export default {
   },
   logout (store) {
     setIsAuth(store, false)
-    setMail(store, false)
+    setUserNo(store, '')
   }
 }

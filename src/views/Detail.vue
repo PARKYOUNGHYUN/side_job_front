@@ -20,7 +20,7 @@
             </div>
           </v-card-title>
           <v-card-actions>
-            <v-btn flat dark v-if="getAuth" @click="onSubmit">Listen now</v-btn>
+            <v-btn dark color="info" v-if="getAuth" @click="onSubmit">応募する</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -41,7 +41,8 @@ export default {
   methods: {
     onSubmit () {
       console.log(this.$store.getters.getUserNo)
-      this.$http.post('progress', {
+      console.log(this.detail.boardNo)
+      this.$http.put('progress', {
         "epId": {
           boardNo: this.detail.boardNo,
           entryUserNo: this.$store.getters.getUserNo

@@ -20,7 +20,8 @@
             </div>
           </v-card-title>
           <v-card-actions>
-            <v-btn dark color="info" v-if="getAuth" @click="onSubmit">応募する</v-btn>
+            <v-btn dark color="info" v-if="checkNotEntryFlag" @click="onSubmit">応募する</v-btn>
+            <p v-if="checkEntryFlag" >応募しました。</p>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -35,13 +36,12 @@ export default {
   name: 'Top',
   data: () => {
     return {
-      detail: ''
+      detail: '',
+      entryFlag: false
     }
   },
   methods: {
     onSubmit () {
-      console.log(this.$store.getters.getUserNo)
-      console.log(this.detail.boardNo)
       this.$http.put('progress', {
         "epId": {
           boardNo: this.detail.boardNo,
@@ -49,18 +49,33 @@ export default {
         },
         entryStatus: 0
       }).then((response) => {
-        console.log(response)
+        this.entryFlag = true
       })
       .catch((e) => {
+        console.error(e)
+      })
+    },
+    checkEntry () {
+      if(!this.getAuth)
+        return
+      this.$http.get('progress', {
+        params: {
+          boardNo: this.detail.boardNo,
+          entryUserNo: this.$store.getters.getUserNo
+        }
+      }).then((response) => {
+        if(response.data)
+          this.entryFlag = true
+      }).catch((e) => {
         console.error(e)
       })
     }
   },
   created() {
-      console.log(this.$route.params.id)
       this.$http.get('board/'+ this.$route.params.id).then((response) => {
         this.detail = response.data
         console.log(this.detail)
+        this.checkEntry()
       }).catch((e) => {
         console.error(e)
       })
@@ -68,7 +83,18 @@ export default {
   computed: {
     ...mapGetters({
       getAuth: 'getIsAuth'
-    })
+    }),
+    checkEntryFlag: function () {
+      return this.entryFlag && this.getAuth
+    },
+    checkNotEntryFlag: function () {
+      return !this.entryFlag && this.getAuth
+    }
+  },
+  watch: {
+    getAuth: function () {
+      this.checkEntry()
+    }
   }
 }
 </script>

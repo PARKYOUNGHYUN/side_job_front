@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import moment from 'moment'
 import SearchBar from '@/components/SearchBar'
 import Board from '@/components/Board'
 
@@ -32,7 +31,7 @@ export default {
     changePostType (postType) {
       this.postType = postType
     },
-    sendCondition: function(condition) {
+    sendCondition (condition) {
       this.condition = condition
     }
   }

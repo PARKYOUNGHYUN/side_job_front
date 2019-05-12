@@ -1,7 +1,7 @@
 <template>
   <div class="grey lighten-3">
     <v-card>
-      <v-container fluid grid-list-lg>
+      <v-container grid-list-lg>
         <v-layout row wrap>
           <v-flex xs4 v-for="post in posts" :key="post.boardNo" @click="goToDetail(post.boardNo)">
             <v-card color="cyan darken-2" class="white--text">
@@ -10,7 +10,7 @@
                   <v-card-title primary-title>
                     <div>
                       <div class="headline">{{ post.title }}</div>
-                      <div>{{ post.content }}</div>
+                      <div>{{ post.content.slice(0, 200) }}</div>
                     </div>
                   </v-card-title>
                 </v-flex>
@@ -19,7 +19,7 @@
               <v-layout>
                 <v-flex xs5>
                   <v-card-title primary-title>
-                    <v-icon>access_time</v-icon>　可能期間
+                    <v-icon left>access_time</v-icon>可能期間
                   </v-card-title>
                 </v-flex>
                 <v-flex xs7>
@@ -31,10 +31,10 @@
                 </v-flex>
               </v-layout>
               <v-divider light></v-divider>
-              <v-card-actions class="pa-3" v-if="post.place">
-                <v-icon>place</v-icon>
-                <p v-for="place in post.place" :key="place">　{{ place }}</p>
-              </v-card-actions>
+              <v-card-title class="pa-3" v-if="post.place">
+                <v-icon left>place</v-icon>
+                <div v-for="place in post.place" :key="place" class="pr-2">{{ place }}</div>
+              </v-card-title>
             </v-card>
           </v-flex>
         </v-layout>
@@ -57,7 +57,7 @@ export default {
     this.createBoard();
   },
   methods: {
-    createBoard: function() {
+    createBoard () {
       this.$http.get('boards', {
         params: {
           postType: this.postType,
@@ -69,12 +69,12 @@ export default {
         console.error(e)
       })
     },
-    goToDetail: function(id) {
+    goToDetail (id) {
       this.$router.push({
         path: '/job/Detail/' + id
       })
     },
-    makePosts:  function(response) {
+    makePosts (response) {
       var list = []
       response.map(function(value) {
         var addrList = value.addressBook.reduce(function(a,b){
@@ -99,15 +99,15 @@ export default {
     }
   },
   filters: {
-    moment: function (date) {
+    moment (date) {
       return moment(date).format('YYYY/MM/DD');
     }
   },
   watch: {
-    postType: function () {
+    postType () {
       this.createBoard()
     },
-    condition: function () {
+    condition () {
       console.log(this.condition)
     }
   }
@@ -116,4 +116,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.flex {cursor: pointer;}
 </style>

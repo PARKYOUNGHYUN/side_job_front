@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar>
+  <v-toolbar class="grey lighten-1">
     <v-toolbar-title>
       <v-btn class="font-weight-bold" flat to="/" exact>ホーム</v-btn>
     </v-toolbar-title>

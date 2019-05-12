@@ -1,10 +1,10 @@
 <template>
   <v-container grid-list-md>
-    <SearchBar @childs-event="parentsMethod"/>
+    <SearchBar @condition="sendCondition"/>
     <v-tabs color="cyan" dark slider-color="yellow">
       <v-tab v-for="n in 2" :key="n" ripple @click="changePostType(n-1)">{{ tabTitle[n-1] }}</v-tab>
       <v-tab-item v-for="n in 2" :key="n">
-        <Board :postType="postType"/>
+        <Board :postType="postType" :condition="condition"/>
       </v-tab-item>
     </v-tabs>
   </v-container>
@@ -24,16 +24,16 @@ export default {
   data: () => {
     return {
       tabTitle: ["求人", "求職"],
-      postType: 0
+      postType: 0,
+      condition: []
     }
   },
   methods: {
     changePostType (postType) {
       this.postType = postType
     },
-    parentsMethod: function(message) {
-      console.log('TEST')
-      console.log(message) // 자식으로 부터받은 메시지를 사용
+    sendCondition: function(condition) {
+      this.condition = condition
     }
   }
 }

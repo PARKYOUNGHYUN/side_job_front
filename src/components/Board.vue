@@ -19,7 +19,7 @@
               <v-layout>
                 <v-flex xs5>
                   <v-card-title primary-title>
-                    <v-icon>access_time</v-icon>　可能時間
+                    <v-icon>access_time</v-icon>　可能期間
                   </v-card-title>
                 </v-flex>
                 <v-flex xs7>
@@ -47,7 +47,7 @@
 import moment from 'moment'
 
 export default {
-  props: ['postType'],
+  props: ['postType', 'condition'],
   data: () => {
     return {
       posts: []
@@ -100,12 +100,15 @@ export default {
   },
   filters: {
     moment: function (date) {
-        return moment(date).format('YYYY/MM/DD');
+      return moment(date).format('YYYY/MM/DD');
     }
   },
   watch: {
     postType: function () {
       this.createBoard()
+    },
+    condition: function () {
+      console.log(this.condition)
     }
   }
 }

@@ -5,12 +5,10 @@
 3. お互いの条件がマッチした場合に取引成立！
 4. 日時を決めてカフェなどでちょっとした楽しい習い事！
 
-## 得意部分
-新しくVue.jsとUIFrameworkのvuetifyに挑戦。
-
-## 工夫点
-初めてVue.jsを使ってみたので、勉強しながら、自身でスクラッチ開発進行した。
-ただの勉強ではなく、Vue.jsの機能一つ一つを理解しながら、身についた。
+## 開発目的
+新しくVue.jsとUIFrameworkのvuetifyに挑戦。  
+勉強しながら、自身でスクラッチ開発を進行した。  
+ただの勉強ではなく、Vue.jsの機能一つ一つを理解しながら、身についた。  
 
 ## できなかったこと
 1. 求人の詳細ページ（2019/05/12 完了）
@@ -23,32 +21,17 @@
 1. ユーザーが使いやすいUI/UXを設計することが難しくて、意外と時間がかかってしまった。
 2. スクラッチ開発経験があまりなくて、時間管理ができなかった。
 
+## 開発構築
+```
+git clone https://github.com/PARKYOUNGHYUN/side_job_front.git
+```
 
-
-## Project setup
+### npmインストール
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 実行
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
